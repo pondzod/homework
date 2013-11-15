@@ -1,30 +1,22 @@
- <div class="row">
-                <div class="span4">
-                <form action="<?echo site_url();?>home/c_login" class="ink-form inline" method="post">
-                  <form class="form-inline">
-                    <div class="control-group">
-                      <label class="control-label" for="inputEmail">Username</label>
-                      <div class="controls">
-                        <input type="text" id="inputEmail" placeholder="Username" name="user">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="inputPassword">Password</label>
-                      <div class="controls">
-                        <input type="password" id="inputPassword" placeholder="Password" name="pass">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <div class="controls">
-                        <label class="checkbox">
-                          <input type="checkbox">Remember me</label>
-                          <br>
-                        <button type="submit" class="btn">Sign in</button>
-                        
-                      </div>
-                      <a href="http://www.w3schools.com">Forget password</a><br>
-                      <a href="<?php echo site_url();?>home/regis_student">สมัครสมาชิค</a>
-                      
-                    </div>
-                  </form>
-                </div>
+<div class ="row">
+ <div class="col-xs-3">
+ <div class="jumbotron">
+              Profile<br>
+              <? foreach ($q as $row){
+              	?><img src="<?echo site_url();?>/User_data/<?php echo $q2?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="100" width="100"><br><br>
+              	<?php echo 'คุณ:' .$row->F_name;
+              }
+              ?>
+              
+        
+              </div>
+              <ul class="nav nav-pills nav-stacked">
+  <li class="active">
+    <a href="#">
+      <span class="badge pull-right">42</span>
+      Home
+    </a>
+  </li>
+  ...
+</ul>
+              </div>

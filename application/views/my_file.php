@@ -1,16 +1,17 @@
 <div class="form-group">
-<div class="col-lg-5">
+<div class="col-lg-5"> 
+<div class="jumbotron">
 <?php
 print $error;
 echo form_open_multipart('home/do_upload');?>
 <input type="file" name="userfile" size="20" />
-</div>
- <div class="col-lg-offset-3 col-lg-9">
+
+
 <input type="submit" value="upload"  class="btn btn-default"/>
 
  </div>
  </div><?php 
- if ($q2){?>
+ if (isset($q2)){?>
 <table class="table"><tr>
 <td>
 Name</td><td>Size</td><td>Create Date </td></tr>

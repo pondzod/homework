@@ -1,6 +1,5 @@
-<div class="span7">
 
-
+ <div class="col-xs-9">
 <?
 
 $strSQL = "SELECT * FROM webboard ";
@@ -98,7 +97,8 @@ if($Page!=$Num_Pages)
                     </li>
                   </ul>
                 </div>
-              </div>
+                
+              
             </div>
             <div></div>
             <div></div>

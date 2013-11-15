@@ -27,6 +27,7 @@ foreach ($q as $row){
 		
 		<br>
 		<?}
+		
 foreach ($q2 as $row){
 ?>
 		<table class="table table-striped" width="738"  cellpadding="1" cellspacing="1">
@@ -90,7 +91,7 @@ foreach ($q2 as $row){
         <h4 class="modal-title">Upload Files</h4>
       </div>
       <div class="modal-body">
-        <p>กำลังทำ สำหรับอัปโหลดไฟล์จาก server&hellip;</p>
+        <p>กำลังทำ:: สำหรับอัปโหลดไฟล์จาก server&hellip;</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

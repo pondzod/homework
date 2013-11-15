@@ -240,10 +240,19 @@ function stu_index()
 {
 
 	$user = $this->session->userdata('user');
+	
+	$sql= "SELECT * FROM student WHERE Username =  '$user' ";
+	$query = $this->db->query($sql)->result();
+	
+	$data["q"] = $query;
+	$data["q2"] = $user;
+	
 	if ($user!='')
 	{
 		$this->load->view('header');
 		$this->load->view('menu');
+		$this->load->view('sidebar',$data);
+		
 		$this->load->view('content');
 		$this->load->view('footer');
 		
@@ -344,7 +353,7 @@ function do_upload()
 
 
 		$data["q2"] = $files;
-	
+		
 		$this->load->view('my_file',$data );
 		
 		
@@ -492,6 +501,10 @@ function change_pass()
 		print('รหัสผ่านเก่าไม่ถูกต้อง');
 	}
 	}
+	
+
+
+
 }
 
 

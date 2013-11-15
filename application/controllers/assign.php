@@ -38,7 +38,7 @@ function reply($a)
 				'Details' => $_POST["txtDetails"],
 				'Name' => $_POST["txtName"]);
 
-if($data != ""){
+if (!isset($data)){
 $sql = $this->db->insert('reply',$data);
 $q = mysql_query($sql);
 	
@@ -50,10 +50,8 @@ $q = mysql_query($sql);
 	
 	?><h1 align="center">Reply Success !</h1>
 	<p align="center"><a href="<?echo site_url();?>home/stu_index">Back</a></p>
-		<?php }
-
-		else print ('กรุณากรอกให้ครบ');
-		
+	<?php } else { print error;
+	}
 	}
 	
 	
