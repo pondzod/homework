@@ -1,7 +1,7 @@
 
 
-<div class="span7"> <div class="col-xs-3"></div>
- <div class="col-xs-6">
+<div class="span7"> 
+ <div class=".col-md-6 .col-md-offset-3">
 <form action="<?echo site_url();?>home/cre_ass1"  enctype="multipart/form-data" class="form-horizontal"  method="post" name="frmMain" id="frmMain" onsubmit="return senddata();" target="uploadtarget">
   
   

@@ -106,11 +106,50 @@ class home extends CI_Controller {
   			'id' => $id_st,
   			'F_name' => $first,
   			'Major' => $major,
-  			'E-mail' => $email,
+  			'E_mail' => $email,
   			'About' => $about,
   			'Pic' => $Pic);
   	 		$sql = $this->db->insert('student',$data);
 			$q = mysql_query($sql);
+			
+		
+			$this->load->helper('directory');
+			$map = directory_map("./User_data/$name/pic");
+			
+			
+			$this->load->library('image_lib');
+			$config['image_library'] = 'gd2';
+			
+			$config['source_image']	= "./User_data/$name/pic/$map[0]";
+			
+			$config['maintain_ratio'] = TRUE;
+			$config['width']	 = 100;
+			$config['height']	= 100;
+			$config['new_image'] ="./User_data/$name/pic/profile_pic.jpg";
+			$this->image_lib->clear();
+			$this->image_lib->initialize($config);
+			if (!$this->image_lib->resize())
+			{
+				echo $this->image_lib->display_errors();
+			}else {
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
   				
   				?>
   						<h1 align="center">Register Success !</h1>

@@ -1,5 +1,26 @@
+ <div class="col-md-2"></div>
+ <div class="col-md-5">
+ <table class="table table-bordered table-striped responsive-utilities">
+ <tr>
+ <td>
+ <form action="<?echo site_url();?>home/post" class="form-horizontal" method="post"  enctype="multipart/form-data" onsubmit="return senddata();" target="uploadtarget">
 
- <div class="col-xs-9">
+
+  
+
+ <textarea name="txtDetails"  class="form-control"  id="name" placeholder="Say something..."></textarea>
+
+   <label for="inputuser" >แนบไฟล์</label>
+  
+<input type="file"   name="file_cre" id="file_cre" />
+
+     <div class="col-md-10"></div>
+                   <button type="submit" class="btn btn-primary">POST</button>
+                  
+                  </div></form></tr></td>
+                  </table></div>
+                  <div class="col-xs-9">
+ 
 <?
 
 $strSQL = "SELECT * FROM webboard ";
