@@ -1,4 +1,4 @@
-<?
+ <div class="col-md-2"></div><div class="col-md-7"><?
 foreach ($q as $row){
 ?>
 		<table class="table table-striped" width="738"  cellpadding="1" cellspacing="1">
@@ -36,7 +36,7 @@ foreach ($q2 as $row){
 		    <td height="53" colspan="2"><?=$row->Details;?></td>
 		  </tr>
 		  <tr>
-		    <td width="397">Name : <?=$row->Name;?> Create Date : <?=$row->CreateDate;?></td>
+		    <td width="397"><img src="<?echo site_url();?>/User_data/<?=$row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img><?=$row->Name;?> Create Date : <?=$row->CreateDate;?></td>
 		    
 		  </tr>
 		</table>
@@ -48,35 +48,31 @@ foreach ($q2 as $row){
 	
 	
 		<br>
-		<form action="<?echo site_url();?>assign/reply/<?echo $row->QuestionID;?>" method="post" name="frmMain" class="form-horizontal" id="frmMain">
-	<div class="form-group">
- 	  <label for="inputuser" class="col-lg-3 control-label">Detail</label>
- 		<div class="col-lg-5">
+		<form action="<?echo site_url();?>assign/reply/<?echo $row->QuestionID;?>" method="post" name="frmMain" class="form-horizontal" id="frmMain" onSubmit="Javascript:return checkReply();" >
+	
+	<table class="table table-bordered table-striped responsive-utilities">
+ <tr class="success">
+ <td>
+ 	
 		      <textarea name="txtDetails" cols="50" rows="5" class="form-control"  id="txtDetails"></textarea>
-		  </div>
-		 </div>
-		 <div class="form-group">
-   		<label for="inputuser" class="col-lg-3 control-label">Username</label>
- 		<div class="col-lg-5">
-		 <input name="txtName" class="form-control" type="text" id="txtName" value="" size="50">
-		 </div>
-		 </div>
-		 
-		    <div class  = "form-group">
-		<div class="col-lg-offset-3 col-lg-9">
+		
+   	
+   		<?php $userm = $this->session->userdata('user');?>
+   	
+ 	
+		<img src="<?echo site_url();?>/User_data/<?php echo $userm?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img>  <?php echo $userm?><br>
+  	</tr><tr><td>
     Attach file:<input type="file"  id="InputFile" name="Pic">
-   <button class="btn btn-default " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-book"> Library</span></button>
-    
-     </div>
-		   </div>
-		   
+  	 <button class="btn btn-default " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-book"> Library</span></button>
+     
+		 
 		  
 		   
-		   <div class="form-group">
-    <div class="col-lg-offset-3 col-lg-9">
+		 
+  
 		  <input name="btnSave" type="submit" id="btnSave"  button type="button" class="btn btn-success" value="Submit">
-		  </div></div>
-		
+		 </div></div></div></td></tr></table>
+		 
 		</form>
 		
 		<a href = "<?echo site_url();?>home/stu_index"  button type="button" class="btn btn-default">Back to Webboard</button></a>
@@ -102,5 +98,19 @@ foreach ($q2 as $row){
 </div><!-- /.modal -->
 		   
 		</body>
-		
+		 <script type="text/javascript">
+          function checkReply(){
+        	  if(document.frmMain.txtDetails.value == "" || document.frmMain.txtName.value == ""  ) 
+        	  {
+        		  window.alert ('กรุณาใส่ให้ครบ');
+        		  document.frmMain.txtDetails.focus();
+              return false;
+        	  }
+              else
+                  return true;
+
+        	  document.frmMain.submit();
+          }
+          
+</script>
 		

@@ -7,7 +7,7 @@ class assign extends CI_Controller {
 	
 	$this->load->view('header');
 	$this->load->view('menu');
-
+ 
 
 		$sql= "SELECT * FROM webboard WHERE QuestionID =  '$a' ";
 $query = $this->db->query($sql)->result();
@@ -18,6 +18,7 @@ $sql2= "SELECT * FROM reply WHERE QuestionID =  '$a' ";
 $query2 = $this->db->query($sql2)->result();
 
 $data["q2"] = $query2;
+
 
 $this->load->view('ViewWebboard',$data);
 
@@ -36,9 +37,8 @@ function reply($a)
 				'QuestionID' => $a,
 				'CreateDate' => date("Y-m-d H:i:s"),
 				'Details' => $_POST["txtDetails"],
-				'Name' => $_POST["txtName"]);
+				'Name' => $this->session->userdata('user'));
 
-if (!isset($data)){
 $sql = $this->db->insert('reply',$data);
 $q = mysql_query($sql);
 	
@@ -49,9 +49,9 @@ $q = mysql_query($sql);
 	$objQuery = mysql_query($strSQL);	
 	
 	?><h1 align="center">Reply Success !</h1>
-	<p align="center"><a href="<?echo site_url();?>home/stu_index">Back</a></p>
-	<?php } else { print error;
-	}
+	<p align="center"><a href="<?echo site_url();?>assign/view/<?php echo $a?>">Back</a></p>
+	<?php 
+	
 	}
 	
 	

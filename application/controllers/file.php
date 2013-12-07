@@ -67,6 +67,20 @@ class file extends CI_Controller {
 			print $map[0];
 			
 		}
+		
+		function delete($a){
+			$user 	= $this->session->userdata('user');
+			$this->load->helper('file');
+			$this->load->helper('directory');
+			$map = directory_map("./User_data/$user/");
+			unlink("./User_data/$user/$a");
+			redirect('home/my_file');
+			
+			
+		
+		
+		
+		}
 	}
 
 	

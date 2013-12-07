@@ -1,7 +1,7 @@
 
 <div class="container">
 
-	<form name="form_log"  class= "form-signin" method="post" action = "<?echo site_url();?>home/c_login"  enctype="multipart/form-data">
+	<form name="form_log"  class= "form-signin" method="post" action = "<?echo site_url();?>home/c_login"  enctype="multipart/form-data"  onSubmit="Javascript:return checkUser();">
         <h2 class="form-signin-heading">Sign in</h2>
         <input type="text" name ="user" class="form-control" placeholder="Username">
         <input type="password" name ="pass" class="form-control" placeholder="Password">
@@ -28,3 +28,20 @@ I'm teacher
       </form><center>
 	<a href="home/regis_student"  button type="button" class="btn btn-default">ลงทะเบียน นักเรียน</button></a>
           <a href="home/regis_teacher"  button type="button" class="btn btn-default">ลงทะเบียน คุณครู</button></a></center>
+          
+          <script type="text/javascript">
+          function checkUser(){
+        	  if(document.form_log.user.value == "" || document.form_log.pass.value == ""  ) 
+        	  {
+        		  window.alert ('กรุณาใส่ให้ครบ');
+        		  document.form_log.user.focus();
+              return false;
+        	  }
+              else
+                  return true;
+
+          
+
+          }
+       
+</script>

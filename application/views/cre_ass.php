@@ -27,11 +27,13 @@
 File size <= 5Mb 
 </div>
  </div>
-
-
-
+  
+     <div class="form-group"><label for="inputuser" class="col-lg-3 control-label">
+     Date:</label>
+     <div class="col-lg-5">
+		 <input type="text" id="datepicker" class="form-control" ></p>
  
-    
+    </div></div>
      
      <div class="form-group">
   <label for="inputuser" class="col-lg-3 control-label">Name</label>
@@ -43,7 +45,9 @@ File size <= 5Mb
   <div class="col-lg-offset-3 col-lg-9">
   <div class="form-group">
   <input name="btnSave" type="submit" id="btnSave"  class="btn btn-primary"   value="Submit">
-</div>
+
+  
+  </div>
   </form>
   </div>
               </div>
@@ -56,5 +60,12 @@ File size <= 5Mb
           </div>
         </div>
 
-
+ <script type="text/javascript">
+<!--
+$(function() {
+    $( "#datepicker" ).datepicker();
+  });
+//-->
+</script>
+  
 

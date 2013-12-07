@@ -1,80 +1,74 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class home extends CI_Controller {
+class home_t extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
-	 *	- or -  
+	 *	- or -
 	 * 		http://example.com/index.php/welcome/index
 	 *	- or -
-	 * Since this controller is set as the default controller in 
+	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	
 
-	
-	
-	public function index()
-	{
-		$this->load->view('header');
-		
-		$this->load->view('index');
-		$this->load->view('footer');
-	}
-	
-	
-	
-	
+
+
+
+
+
+
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 	}
-	
 
- function regis_student()
-  {
-  	$this->load->view('header');
- 
-  	$this->load->view('regis_stu');
-  	$this->load->view('footer');
-  }
-  
-  function regis_teacher()
-  {
-  	$this->load->view('header');
-  	
-  	$this->load->view('regis_teach');
-  	$this->load->view('footer');
-  }
-  
-  
 
-  function stu_register()
-  {
-  	
-  	$user 	= $this->session->userdata('user');
+	function regis_student()
+	{
+		$this->load->view('header');
 
-  	
-  	$name = $this->input->post('name');
-  	$password = $this->input->post('password');
-  	$id_st = $this->input->post('id_st');
-  	$first = $this->input->post('first');
-  	$major = $this->input->post('major');
-  	$email = $this->input->post('email');
-  	$about = $this->input->post('about');
+		$this->load->view('regis_stu');
+		$this->load->view('footer');
+	}
 
-  	$sql2 = "SELECT * FROM student WHERE Username ='$name'";
-  	$q2 = mysql_query($sql2);
-  	$res2 = mysql_fetch_array($q2);
-  	
+	function regis_teacher()
+	{
+		$this->load->view('header');
+		 
+		$this->load->view('regis_teach');
+		$this->load->view('footer');
+	}
+
+
+
+	function stu_register()
+	{
+		 
+		$user 	= $this->session->userdata('user');
+
+		 
+		$name = $this->input->post('name');
+		$password = $this->input->post('password');
+		$id_st = $this->input->post('id_st');
+		$first = $this->input->post('first');
+		$major = $this->input->post('major');
+		$email = $this->input->post('email');
+		$about = $this->input->post('about');
+
+		$sql2 = "SELECT * FROM student WHERE Username ='$name'";
+		$q2 = mysql_query($sql2);
+		$res2 = mysql_fetch_array($q2);
+
+
   		if (empty($name) || empty($password) || empty($id_st) || empty($first) || empty($major) || empty($email)) { ?>
   			<h4 align="center">Register Failed กรุณากรอกให้ครบ !</h4>
   			<p align="center"><a href="<?echo site_url();?>home">Back</a></p>
@@ -170,7 +164,7 @@ class home extends CI_Controller {
   {
   $user 	= $this->session->userdata('user');
   	$this->load->view('header');
-  	 $this->load->view('menu');
+  	 $this->load->view('menu_teach');
   	 $sql= "SELECT * FROM student WHERE Username =  '$user' ";
   	 $query = $this->db->query($sql)->result();
   	 
@@ -237,8 +231,7 @@ class home extends CI_Controller {
   		}
   		if ($type ='teacher'){ 
 if (empty($n) || empty($s)) { ?>
-
-
+  			<h1 align="center">login Failed !</h1>
   			<p align="center"><a href="<?echo site_url();?>home">Back</a></p>
   			<?}else{ 
   
@@ -259,7 +252,7 @@ if (empty($n) || empty($s)) { ?>
   					?>
   					
   					<h1 align="center">login Success !</h1>
-  					<?php redirect('home_t/teacher_index');?>
+  					<?php redirect('home/teacher_index');?>
   				<?}
   			?>
   
@@ -289,7 +282,7 @@ function stu_index()
 	if ($user!='')
 	{
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu_teach');
 		$this->load->view('sidebar',$data);
 
 		$sql= "SELECT * FROM webboard WHERE QuestionID =  '20' ";
@@ -362,8 +355,8 @@ function do_upload()
 		
 	$user 	= $this->session->userdata('user');
 		$config['upload_path'] = "./User_data/$user";
-		$config['allowed_types'] = '*';
-		$config['max_size']	= '50000';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '1000';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
 
@@ -373,20 +366,16 @@ function do_upload()
 		{
 			$error = array('error' => $this->upload->display_errors());
 			$this->load->view('header');
-			$this->load->view('menu');
+				$this->load->view('menu_teach_teach');
 			$this->load->view('my_file', $error);
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
 			$this->load->view('header');
-			$this->load->view('menu');
+			$this->load->view('menu_teach');
 			$this->load->view('upload_success', $data);
-		
-			
 		}
-		
-		
 	}
 
 
@@ -395,7 +384,7 @@ function do_upload()
 	
 		$user 	= $this->session->userdata('user');
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu_teach');
 		$this->load->helper('file');
 		$path  = "./User_data/$user";
 		$files = get_dir_file_info ($path,$top_level_only = TRUE);
@@ -431,7 +420,7 @@ $file = $_FILES["file_cre"]["name"];
 $Question = $this->input->post('txtQuestion');
 $Details = $this->input->post('txtDetails');
 $Name = $this->input->post('txtName');
-
+$user 	= $this->session->userdata('user');
 $data = array(
 		'CreateDate' => date("Y-m-d H:i:s"),
 		'Question' => $Question,
@@ -459,10 +448,19 @@ function cre_ass()
 {
 	
 	$this->load->view('header');
-	$this->load->view('menu');
+	$this->load->view('menu_teach');
 	$this->load->view('cre_ass', array('error' => ' ' ));
 	$this->load->view('footer');
 	
+}
+
+function teacher_index()
+
+{
+	$this->load->view('header');
+	$this->load->view('menu_teach');
+	$this->load->view('content');
+	$this->load->view('footer');
 }
 
 function  logout()
@@ -515,7 +513,7 @@ function change_pass()
 {
 	
 	$this->load->view('header');
-	$this->load->view('menu');
+	$this->load->view('menu_teach');
 	$this->load->view('change_pass');
 	$this->load->view('footer');
 	
@@ -559,7 +557,7 @@ function change_pass()
 	
 	{
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu_teach');
 		$this->load->view('Assignment');
 		$this->load->view('footer');
 		

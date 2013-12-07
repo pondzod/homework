@@ -12,7 +12,7 @@ echo form_open_multipart('home/do_upload');?>
  </div>
  </div><?php 
  if (isset($q2)){?>
-<table class="table"><tr>
+<table class="table"  table id="myTable"><tr>
 <td>
 Name</td><td>Size</td><td>Create Date </td></tr>
  <?php 
@@ -33,16 +33,27 @@ Name</td><td>Size</td><td>Create Date </td></tr>
  	
  	<?php print  date('d/m/Y H:i:s', $f['date']); ?>
  	</td><td>
- 	<a href = "<?echo site_url();?>file/download/<? echo $f['name'];?>" button type="button" class="btn btn-success">download</a>
+ 	<a href = "<?echo site_url();?>file/download/<? echo $f['name'];?>" button type="button" class="btn btn-success">Download</a>
+
+ 	</td>
+ 	<td>
+ 	<a href = "<?echo site_url();?>file/delete/<? echo $f['name'];?>" button type="button" class="btn btn-danger"  onclick="Refreshtable();">Delete</a>
  	</td></tr>
  	<?php 
- 	
+
+ 
  }
+ 
+ 
  }
 else 
 	print ('<br> Do not have any file');
 	
  ?> </table>
+ 
+ </script>
 </div>
 </div><?php 
 ?>
+
+

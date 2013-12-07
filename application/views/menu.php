@@ -15,14 +15,12 @@
                        <a href="<?php echo base_url();?>home/stu_index">Home</a>
                       </li>
                       <li>
-                        <a href="#">Assignment</a>
+                        <a href="<?php echo base_url();?>home/assign">Assignment</a>
                       </li>
                   
+                     
                       <li>
-                        <a href="<?php echo base_url();?>home/cre_ass">ตั้งหัวข้อ</a>
-                      </li>
-                      <li>
-                        <a href="<?php echo base_url();?>home/my_file">my file</a>
+                        <a href="<?php echo base_url();?>home/my_file">My file</a>
                       </li>
                       <li>
                         <a href="#">About</a>
