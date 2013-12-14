@@ -10,12 +10,10 @@
           </div>
        </div>
     </div>
-
-</footer>
-
 </div>
-  </body>
-   <script src="<?php echo base_url();?>assets/js/jquery.js"></script>
-    <script src="<?php echo base_url();?>asset/js/bootstrap.min.js"></script>
-  </body>
-</html>
+</footer>
+ <script src="<?echo base_url();?>asset/js/jquery-ui.js"></script>
+	<script  src="<?echo base_url();?>asset/js/bootstrap.js"></script>
+   <script  src="<?echo base_url();?>asset/js/jquery.js"></script>
+	</body>
+	</html>

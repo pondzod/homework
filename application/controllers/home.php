@@ -46,6 +46,13 @@ class home extends CI_Controller {
   	$this->load->view('regis_stu');
   	$this->load->view('footer');
   }
+  function test()
+  {
+  	$this->load->view('header');
+  
+  	$this->load->view('test');
+  	$this->load->view('footer');
+  }
   
   function regis_teacher()
   {
@@ -54,7 +61,18 @@ class home extends CI_Controller {
   	$this->load->view('regis_teach');
   	$this->load->view('footer');
   }
+  function profile($name)
+
+  {
   
+  	$this->load->view('header');
+  	$this->load->view('menu');
+  	$query = $this->db->get('student');
+  	
+  	
+  	$this->load->view('footer');
+  	
+  }
   
 
   function stu_register()

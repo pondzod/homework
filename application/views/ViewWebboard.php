@@ -1,6 +1,6 @@
  <div class="col-md-2"></div><div class="col-md-7"><?
 foreach ($q as $row){
-?>
+?><?php $name = $row->Name;?>
 		<table class="table table-striped" width="738"  cellpadding="1" cellspacing="1">
 		<tr>
 		<td colspan="2"><center><h1><?=$row->Question?></h1></center></td>
@@ -9,7 +9,7 @@ foreach ($q as $row){
 		    <td height="53" colspan="2"><?=$row->Details;?></td>
 		  </tr>
 		  <tr>
-		    <td width="397">Name : <?=$row->Name;?> Create Date : <?=$row->CreateDate;?></td>
+		    <td width="397"><img src="<?echo site_url();?>User_data/<?=$row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img>   Create Date : <?=$row->CreateDate;?></td>
 		    <td width="253">View : <?=$row->View;?> Reply : <?=$row->Reply;?></td>
 		<?php  
 		$file =  $row->file;
@@ -22,8 +22,8 @@ foreach ($q as $row){
 		
 	}	
 	if ($file){
-	?>ไฟล์ที่แนบมา
-	<a href="<?php echo base_url();?>file/download_ass/<?php  echo $file?>" class="btn btn-primary">Download</a></button>
+	?>
+	<a href="<?php echo base_url();?>file/download_ass/<?php  echo $file?>" class="btn btn-primary  btn-sm">Download</a></button>  <?echo $file?>
 		
 		<br>
 		<?}
@@ -35,8 +35,10 @@ foreach ($q2 as $row){
 		  <tr>
 		    <td height="53" colspan="2"><?=$row->Details;?></td>
 		  </tr>
-		  <tr>
-		    <td width="397"><img src="<?echo site_url();?>/User_data/<?=$row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img><?=$row->Name;?> Create Date : <?=$row->CreateDate;?></td>
+		  <tr><?php $name = $row->Name;?>
+		    <td width="397"><img src="<?echo site_url();?>/User_data/<?=$row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img>  
+		    <a href="<?php echo base_url();?>home/profile/<?echo $name;?>"> <?=$row->Name;?></a>   
+		    Create Date : <?=$row->CreateDate;?></td>
 		    
 		  </tr>
 		</table>

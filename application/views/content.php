@@ -77,9 +77,14 @@ foreach ($q4 as $row){
 	
 		<?php
 		
+	
 	}	
+	
+	
 	
 	?>
 	
-		
+	
+  
+
  
