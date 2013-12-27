@@ -1,6 +1,7 @@
+
 <div class ="row">
- <div class="col-xs-3">
- 
+<div class="col-xs-3">
+
  <?php $user 	= $this->session->userdata('user');?>
              <table class="table table-bordered table-striped responsive-utilities">
  <tr>
@@ -15,21 +16,22 @@
               ?></td></tr>
               </table>
         
-             
-              Group: <a href="#myModal" data-toggle="modal">Create</a>  or         
+            
+              Group: <a href="#create" data-toggle="modal">Create</a>  or         
  				   <a href="#myModal" data-toggle="modal">Join</a>
+             
               <ul class="nav nav-pills nav-stacked">
   <li class="active">
-    <a href="#">
-      <span class="badge pull-right">42</span>
-      Home
+    <? foreach ($q2 as $row){?>
+  <a href ="<?echo site_url();?>group/index/<?php echo $row->Group_ID;?>">
+     <?php echo $row->Group_Name; ?><span class="badge pull-right">42</span>
     </a>
-  </li>  </ul>
- 
+  </li> <?php }?> </ul>
+  
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

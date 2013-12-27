@@ -12,8 +12,10 @@
     </div>
 </div>
 </footer>
- <script src="<?echo base_url();?>asset/js/jquery-ui.js"></script>
-	<script  src="<?echo base_url();?>asset/js/bootstrap.js"></script>
-   <script  src="<?echo base_url();?>asset/js/jquery.js"></script>
+
+	<script  src="<?echo base_url();?>asset/js/bootstrap.min.js"></script>
+     <script src="<?echo base_url();?>asset/js/jquery-1.8.3.js"></script>
+
+    <script src="<?echo base_url();?>asset/js/jquery-ui.js"></script>
 	</body>
 	</html>

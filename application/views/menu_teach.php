@@ -16,7 +16,7 @@
 <a href="<?php echo base_url();?>home_t/teacher_index">Home</a>
 </li>
 <li>
-<a href="<?php echo base_url();?>home_t/assign">Assignment</a>
+<a href="<?php echo base_url();?>home_t/assign_t">Assignment</a>
 </li>
 
 <li>

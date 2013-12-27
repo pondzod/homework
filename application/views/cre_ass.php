@@ -2,7 +2,7 @@
 
 <div class="span7"> 
  <div class=".col-md-6 .col-md-offset-3">
-<form action="<?echo site_url();?>home/cre_ass1"  enctype="multipart/form-data" class="form-horizontal"  method="post" name="frmMain" id="frmMain" onsubmit="return senddata();" target="uploadtarget">
+<form action="<?echo site_url();?>home_t/cre_ass1"  enctype="multipart/form-data" class="form-horizontal"  method="post" name="frmMain" id="frmMain" onsubmit="return senddata();" target="uploadtarget">
   
   
  <div class="form-group">
@@ -31,17 +31,21 @@ File size <= 5Mb
      <div class="form-group"><label for="inputuser" class="col-lg-3 control-label">
      Date:</label>
      <div class="col-lg-5">
-		 <input type="text" id="datepicker" class="form-control" ></p>
+		 <input type="text" id="datepicker" class="form-control" name = "date"></p>
  
     </div></div>
      
-     <div class="form-group">
-  <label for="inputuser" class="col-lg-3 control-label">Name</label>
+
+  
+   <div class="form-group">
+  <label for="inputuser" class="col-lg-3 control-label">Group</label>
      
      <div class="col-lg-5">
      <input name="txtName" type="text" id="txtName"  class="form-control"   value="" size="50">
   </div>
   </div>
+  
+  
   <div class="col-lg-offset-3 col-lg-9">
   <div class="form-group">
   <input name="btnSave" type="submit" id="btnSave"  class="btn btn-primary"   value="Submit">
@@ -61,11 +65,12 @@ File size <= 5Mb
         </div>
 
  <script type="text/javascript">
-<!--
+
 $(function() {
     $( "#datepicker" ).datepicker();
+    $( ".selector" ).datepicker({ dateFormat: "yy-mm-dd" });
   });
-//-->
+
 </script>
   
 

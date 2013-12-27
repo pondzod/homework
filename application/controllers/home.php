@@ -24,8 +24,8 @@ class home extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('header');
-		
 		$this->load->view('index');
+		
 		$this->load->view('footer');
 	}
 	
@@ -39,13 +39,7 @@ class home extends CI_Controller {
 	}
 	
 
- function regis_student()
-  {
-  	$this->load->view('header');
- 
-  	$this->load->view('regis_stu');
-  	$this->load->view('footer');
-  }
+
   function test()
   {
   	$this->load->view('header');
@@ -54,13 +48,7 @@ class home extends CI_Controller {
   	$this->load->view('footer');
   }
   
-  function regis_teacher()
-  {
-  	$this->load->view('header');
-  	
-  	$this->load->view('regis_teach');
-  	$this->load->view('footer');
-  }
+
   function profile($name)
 
   {
@@ -121,7 +109,7 @@ class home extends CI_Controller {
   			'Username' => $name,
   			'Password' => $password,
   			'id' => $id_st,
-  			'F_name' => $first,
+  			'name' => $first,
   			'Major' => $major,
   			'E_mail' => $email,
   			'About' => $about,
@@ -339,16 +327,10 @@ function teacher_regis()
 	$sql2 = "SELECT * FROM teacher WHERE Username ='$name'";
 	$q2 = mysql_query($sql2);
 	$res2 = mysql_fetch_array($q2);
-	$data = array(
-			'Username' => $name,
-			'Password' => $password,
-			'First' => $first,
-			'E-mail' => $email,
-			'About' => $about);
-	 
+	
 	 
 	
-	  		if (empty($name) || empty($password) ||empty($first) || empty($email)) { ?>
+	  		if (empty($name) || empty($password) ||empty($name) || empty($email)) { ?>
 	  			<h4 align="center">Register Failed กรุณากรอกให้ครบ !</h4>
 	  			<p align="center"><a href="<?echo site_url();?>home">Back</a></p>
 	  
@@ -358,9 +340,52 @@ function teacher_regis()
 	  					<h1 align="center">Username ซ้ำ !</h1>
 	  					<p align="center"><a href="<?echo site_url();?>home">Back</a></p>
 	  			<?	} else {
-	  				$sql = $this->db->insert('teacher',$data);
-	  				$q = mysql_query($sql);
-	  				?>
+	  			
+	  				
+	  				$directory = "./User_data/$name/pic";
+	  				
+	  				mkdir($directory,0777,true);
+	  				
+	  					
+	  		
+	  		
+	  			if(copy($_FILES["Pic"]["tmp_name"],"./User_data/$name/pic/".$_FILES["Pic"]["name"]))
+  	{
+  	
+  		$fileUpload=$_FILES["Pic"]["name"];
+  	}
+  	$Pic = $_FILES["Pic"]["name"];
+  	
+  $data = array(
+			'Username' => $name,
+			'Password' => $password,
+			'name' => $first,
+			'E_mail' => $email,
+			'About' => $about);
+	 
+  	 		$sql = $this->db->insert('teacher',$data);
+			$q = mysql_query($sql);
+			
+		
+			$this->load->helper('directory');
+			$map = directory_map("./User_data/$name/pic");
+			
+			
+			$this->load->library('image_lib');
+			$config['image_library'] = 'gd2';
+			
+			$config['source_image']	= "./User_data/$name/pic/$map[0]";
+			
+			$config['maintain_ratio'] = TRUE;
+			$config['width']	 = 100;
+			$config['height']	= 100;
+			$config['new_image'] ="./User_data/$name/pic/profile_pic.jpg";
+			$this->image_lib->clear();
+			$this->image_lib->initialize($config);
+			if (!$this->image_lib->resize())
+			{
+				echo $this->image_lib->display_errors();
+			}else {?>
 	  						<h1 align="center">Register Success !</h1>
 	  						<p align="center"><a href="<?echo site_url();?>home">Back</a></p>
 	  		
@@ -368,9 +393,15 @@ function teacher_regis()
 	  
 	  			
 	  			}
-	  			?>
 	  		
-	  		<?
+	  		
+	  		
+	  	
+			}
+			
+			
+			
+	  		
 	  
 }
 
@@ -510,7 +541,7 @@ function edit()
 				
 			
 			'id' => $id_st,
-			'F_name' => $first,
+			'name' => $first,
 			'Major' => $major,
 			'E_mail' => $email,
 			'About' => $about,

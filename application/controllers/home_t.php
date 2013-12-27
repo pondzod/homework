@@ -266,42 +266,46 @@ if (empty($n) || empty($s)) { ?>
   	}
   	
   	
+  
+  
+function cre_group()
 
-
-function stu_index()
 {
-
-	$user = $this->session->userdata('user');
+	$user 	= $this->session->userdata('user');
+	$name = $this->input->post('name');
+	$name_sub = $this->input->post('name_sub');
+	$major = $this->input->post('major');
+	$group = $this->input->post('group');
+	$gen = $this->input->post('gen');
+	$data = array(
+			
+			'Group_Name' => $name,
+			'Major' => $major,
+			'Subject_name' => $name_sub,
+			'Group_Learn' => $group,
+			'Head' => $user,
+			'Key' => $gen	);
 	
-	$sql= "SELECT * FROM student WHERE Username =  '$user' ";
-	$query = $this->db->query($sql)->result();
 	
-	$data["q"] = $query;
-	$data["q2"] = $user;
+			$sql = $this->db->insert('group_detail',$data);
+			$q = mysql_query($sql);
+			$this->load->view('header');
+			$this->load->view('menu_teach');
+			
+			$this->load->library('session');
+			
+$sql2= "SELECT * FROM Group_detail WHERE Group_Name =  '$name' ";
+$query2 = $this->db->query($sql2)->result();
+$data2["q"] = $query2;
+$this->load->view('success_group',$data2);
+			
 	
-	if ($user!='')
-	{
-		$this->load->view('header');
-		$this->load->view('menu_teach');
-		$this->load->view('sidebar',$data);
-
-		$sql= "SELECT * FROM webboard WHERE QuestionID =  '20' ";
-		$query = $this->db->query($sql)->result();
-		
-		$data["q3"] = $query;
-		
-		$sql2= "SELECT * FROM reply WHERE QuestionID =  '20' ";
-		$query2 = $this->db->query($sql2)->result();
-		
-		$data["q4"] = $query2;
-		
-		$this->load->view('content',$data);
-		$this->load->view('footer');
-		
-	}else{
-	redirect('index.php');
-	}
+	
+	
 }
+
+
+
 function teacher_regis()
 {
 
@@ -318,7 +322,7 @@ function teacher_regis()
 			'Username' => $name,
 			'Password' => $password,
 			'First' => $first,
-			'E-mail' => $email,
+			'E_mail' => $email,
 			'About' => $about);
 	 
 	 
@@ -411,7 +415,7 @@ function do_upload()
 function cre_ass1(){
 
 
-if(copy($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name"]))
+if(move_uploaded_file($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name"]))
 {
 
 	$fileUpload=$_FILES["file_cre"]["name"];
@@ -419,27 +423,35 @@ if(copy($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name
 $file = $_FILES["file_cre"]["name"];
 $Question = $this->input->post('txtQuestion');
 $Details = $this->input->post('txtDetails');
-$Name = $this->input->post('txtName');
+
 $user 	= $this->session->userdata('user');
+$date = date('Y-m-d',strtotime($_POST['date']));
 $data = array(
 		'CreateDate' => date("Y-m-d H:i:s"),
 		'Question' => $Question,
 		'Details' => $Details,
-		'Name' => $Name,
-		'file' => $file );
+		'Name' => $user,
+		'file' => $file,
+		'Date_end' => $date);
 
-if (empty($Question) || empty($Details) ||empty($Name) ) { 
+if (empty($Question) || empty($Details)) { 
 print ('กรอกให้ครบ');}
 else {
 	
+
 $sql = $this->db->insert('webboard',$data);
 $q = mysql_query($sql);
+$sql2 = "SELECT MAX(QuestionID)FROM webboard;";
+$q2 = mysql_query($sql2);
+$q2 = $q2+1;
+$directory = "./file_assignment/$q2";
 
+mkdir($directory,0777,true);
 
 
 ?>
 <h1 align="center">	ตั้งหัวข้อเรียบร้อย!</h1>
-<p align="center"><a href="<?echo site_url();?>home/stu_index">Back</a></p>
+<p align="center"><a href="<?echo site_url();?>home_t/teacher_index">Back</a></p>
 <?php }
  }
 
@@ -457,8 +469,21 @@ function cre_ass()
 function teacher_index()
 
 {
+	
+	$user = $this->session->userdata('user');
+	
+	$sql= "SELECT * FROM teacher WHERE Username =  '$user' ";
+	$query = $this->db->query($sql)->result();
+	
+	$sql= "SELECT * FROM group_detail WHERE Head=  '$user' ";
+	$query2 = $this->db->query($sql)->result();
+	
+	
+	$data["q"] = $query;
+	$data["q2"] = $query2;
 	$this->load->view('header');
 	$this->load->view('menu_teach');
+	$this->load->view('side_bar_t',$data);
 	$this->load->view('content');
 	$this->load->view('footer');
 }
@@ -553,12 +578,12 @@ function change_pass()
 	}
 	}
 	
-	function assign()
+	function assign_t()
 	
 	{
 		$this->load->view('header');
 		$this->load->view('menu_teach');
-		$this->load->view('Assignment');
+		$this->load->view('Assign_t');
 		$this->load->view('footer');
 		
 	}
