@@ -69,7 +69,7 @@ foreach ($q2 as $row){
   	 
   	  <input name="btnSave" type="submit" id="btnSave"  button type="button" class="btn btn-success" value="Submit">
   	  <button class="btn btn-default " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-book"> Library</span></button>
-     <a href="#assignment" data-toggle="modal"button type="button" class="btn btn-info btn-md">ส่งงาน</button></a>
+     <a href="<?echo site_url();?>assign_t/check/<?php echo $id_ass;?>"data-toggle="modal"button type="button" class="btn btn-info btn-md">ตรวจงาน</button></a>
 		 
 		 </div></div></div></td></tr></table>
 		 

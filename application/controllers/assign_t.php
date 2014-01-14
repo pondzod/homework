@@ -5,7 +5,7 @@ class assign_t extends CI_Controller {
 
 	function view($a)
 	{
-
+		$data["id_ass"] = $a;
 		$this->load->view('header');
 		$this->load->view('menu_teach');
 
@@ -19,9 +19,9 @@ class assign_t extends CI_Controller {
 		$query2 = $this->db->query($sql2)->result();
 
 		$data["q2"] = $query2;
+		
 
-
-		$this->load->view('ViewWebboard',$data);
+		$this->load->view('View_t',$data);
 
 		?>
 		
@@ -91,7 +91,35 @@ $q = mysql_query($sql);
 		
 		
 	}
-	
+	function check($id_ass)
+	{
+		$sql= "SELECT * FROM webboard WHERE QuestionID =  '$a' ";
+		$query = $this->db->query($sql)->result();
+		if (empty($query))
+		{
+
+			$this->load->view('check_ass');
+		
+		}
+		else 
+		{
+			$this->load->helper('file');
+			$path  = "./file_assignment/$id_ass";
+			$files = get_dir_file_info ($path,$top_level_only = TRUE);
+			
+			$data= array('error' => ' ')  ;
+			
+			
+			
+			
+			$data["q2"] = $files;
+			
+			$this->load->view('my_file',$data );
+			
+			
+			
+		}
+	}
 	
 }
 	

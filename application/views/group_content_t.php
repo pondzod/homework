@@ -84,38 +84,27 @@ File size <= 5Mb
    		if (!isset($q2))
    		{?><div class="alert alert-info"><?php print 'ไม่มีโพสต์'; ?></div><?php }
    		else
-   		{
+   		{?>
+   			<table class = "table" >
+   			<tr>
+   			 
+   			<th> Question</th>
+   			<th>Name</th>
+   			<th> CreateDate</div></th>
    			
-   			foreach ($q5 as $rows)
-   			foreach ($q2 as $row){{
-
-   				?><table class="table table-bordered">
-   				<tr><td>
-   					<img src="<?echo site_url();?>/User_data/<?php echo  $row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img> <?php echo $row->Name;?><br>
-   			 	<?echo $row->Question;?>
-   			 	<tr><td><?php 
-   			 	echo $row->Details;?>
-   				<br>
-   				Create Date:
-   				<?php echo $row->CreateDate?>
-   				 </td></tr><tr>
-   				<td><?php echo $rows->Details?><td>
-   				<img src="<?echo site_url();?>/User_data/<?php echo $userm?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50">  <br>Reply:
-   				<form action="<?echo site_url();?>assign/reply/<?echo $row->QuestionID;?>" class="form-horizontal" method="post"  enctype="multipart/form-data" onsubmit="return senddata();" target="uploadtarget">
-   		
-   			 <input type="text"   name="txtDetails"  class="form-control"  id="name" ><br>
-   				 <div class="col-md-9"> <div class="col-md-10"></div><a href="#assignment" data-toggle="modal" button type="" class="btn btn-primary">ส่งงาน</a>
-   				 </div>&nbsp; &nbsp;&nbsp;   <button type="" class="btn btn-default">Comment</button>
-   				
-   				
-   				
-   				
-   				
-   				
-   			</form>	
-   			</table>
-   			<?php }}?>
-</div>
+   			</tr>
+   			<?php 
+   			foreach ($q2 as $row){
+?>
+   				<td><a href="<?echo site_url();?>assign_t/view/<?echo $row->QuestionID;?>">
+    <? echo $row->Question;?></a>
+    <td><?echo $row->Name;?></td>
+    <td><?echo $row->CreateDate;?></td>
+  
+  </tr>
+   			
+   			<?php }?>
+</div></table>
 <?php }?>
 	
   
