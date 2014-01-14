@@ -1,72 +1,108 @@
-
-	
-   		<?php $userm = $this->session->userdata('user');?>
  <div class="col-md-2"></div>
  <div class="col-md-5">
- <table class="table table-striped">
-<?php
- foreach ($q2 as $row){
-	?><tr><td>
-		<img src="<?echo site_url();?>/User_data/<?php echo  $row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img> <?php echo $row->Name;?><br>
- 	<?echo $row->Question;?>
- 	<tr><td><?php 
- 	echo $row->Details;?>
-	<br>
-	Create Date:
-	<?php echo $row->CreateDate?>
-	 </td></tr><tr>
-	<td>
-	<img src="<?echo site_url();?>/User_data/<?php echo $userm?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50">  <br>Reply:
-	<form action="<?echo site_url();?>home/post" class="form-horizontal" method="post"  enctype="multipart/form-data" onsubmit="return senddata();" target="uploadtarget">
+ Post:
+ <ul class="nav nav-tabs">
+  <li><a href="#home" data-toggle="tab">Note</a></li>
+  <li><a href="#ass" data-toggle="tab">Assignment</a></li>
+ 
+</ul>
 
 
+<div class="tab-content">
+  <div class="tab-pane active" id="home"><table class="table table-bordered table-striped responsive-utilities">
+ <tr>
+ <td>
+ <form action="<?echo site_url();?>home/post" class="form-horizontal" method="post"  enctype="multipart/form-data" onsubmit="return senddata();" target="uploadtarget">
 
- <input type="text"  name="txtDetails"  class="form-control"  id="name" >
-	 <div class="col-md-9"></div>&nbsp; &nbsp;&nbsp;   <button type="" class="btn btn-default">Comment</button>
-	<tr><td>
-	 <div class="col-md-10"></div><a href="#assignment" data-toggle="modal" button type="" class="btn btn-primary">ส่งงาน</a></td></tr>
+
+  
+
+ <textarea name="txtDetails"  class="form-control"  id="name" placeholder="Say something..."></textarea>
+
+   <label for="inputuser" >แนบไฟล์</label>
+  
+<input type="file"   name="file_cre" id="file_cre" />
+
+     <div class="col-md-10"></div>
+                   <button type="submit" class="btn btn-primary">POST</button>
+                  
+                  </div></form></tr></td>
+                  </table></div>
+                  
+                  
+                  <div class="col-xs-9">
+</table> </div>
+<!-- TAB2-->
+
+  <div class="tab-pane" id="ass">
+
+
+	
+		
+	
+<table class = "table" >
+  <tr>
+   
+   <th> Question</th>
+   <th>Name</th>
+   <th> CreateDate</div></th>
+
+  </tr>
+<?
+foreach ($q2 as $row){
 	
 	
-	
-	
-	<?php 
+?>
+
+    
+    <td><a href="<?echo site_url();?>assign/view/<?echo $row->QuestionID;?>">
+    <?echo $row->Question;?></a>
+    <td><?echo $row->Name;?></td>
+    <td><?echo $row->CreateDate;?></td>
+  
+  </tr>
+<?
 }
-
-?></form>
+?>
 </table>
 
-<div class="modal fade" id="assignment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-<h4 class="modal-title" id="myModalLabel">ส่งงาน</h4>
+<br>
+
+          
+         
 </div>
-<div class="modal-body">
-<form id="f1" action="<?echo site_url();?>home_t/cre_group" class="form-horizontal" method="post">
- <table class="table table-bordered table-striped responsive-utilities"><?php 
- 
- foreach ($q2 as $row){
-	?><tr><td><?php 
- 	echo $row->Question;?>
- 	<tr><td><?php 
- 	echo $row->Details;
 	
-	}?> </td></tr>
-	</table>  
-<textarea id="about" name="about" class= "form-control" rows="4" cols="5"></textarea>
+   		<?php $userm = $this->session->userdata('user');
+   		
+   		if (!isset($q2))
+   		{?><div class="alert alert-info"><?php print 'ไม่มีโพสต์'; ?></div><?php }
+   		else
+   		{
+   		
+   			
+   		
+   		?>
 
- Attach file:<input type="file"  id="InputFile" name="Pic">
-</div>
+
+<?php }?>
+ <script type="text/javascript">
+
+$(function() {
+    $( "#datepicker" ).datepicker({
+changeYear:true,
+changeMonth:true
+        });
+    $( ".selector" ).datepicker({ dateFormat: "yy-mm-dd" });
+
+    
+   
+  });
+function QuestionID()
+{
+window.location = '#assignment?var='+document.form.txtName.value+'&var2='+document.form.txtName2.value;
+}
 
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button  type="submit" class="btn btn-primary">ส่งงาน</button>
-        </form>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-</div>
 
+</script>
+	

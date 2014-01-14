@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class group extends CI_Controller {
+class group_t extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,49 +26,38 @@ class group extends CI_Controller {
 	$user = $this->session->userdata('user');
 	
 	$this->load->view('header');
-	$this->load->view('menu');
-	$sqlcheck = "SELECT * FROM `group_user` WHERE `GroupID` = '$id' AND `Username` ='$user'";
+	$this->load->view('menu_teach');
+	$sqlcheck = "SELECT * FROM group_detail WHERE Head=  '$user' ";
 	$query6 = $this->db->query($sqlcheck)->result();
+	$data["q3"] = $id;
 	if (empty($query6))
 	{
 	
 		
-		$this->load->view('group_content');
+		$this->load->view('group_content_t',$data);
 	}
 	else {
-	$sql= "SELECT * FROM student WHERE Username =  '$user' ";
+	$sql= "SELECT * FROM teacher WHERE Username =  '$user' ";
 	$query = $this->db->query($sql)->result();
 	$user_bar["q"] = $query;
 	
-	
-	
+	$sql= "SELECT * FROM group_detail WHERE Head=  '$user' ";
+	$query2 = $this->db->query($sql)->result();
 
-	$sql2= "SELECT GroupID FROM group_user WHERE Username=  '$user' ";
-	$query3 = mysql_query($sql2);
+	$user_bar["q2"] =$query2 ;
+	$this->load->view('side_bar_t',$user_bar);
+	$sql2= "SELECT * FROM webboard	 WHERE Group_ID =  '$id' ";
+	$query3 = $this->db->query($sql2)->result();
 	
-	while ($id_g = mysql_fetch_array($query3))
-	{
-	
-		$sql3= "SELECT * FROM group_detail WHERE Group_ID =  '$id_g[GroupID]' ";
-		$query4 = $this->db->query($sql3)->result();
-		$user_bar["q4"]= $query4;
-	
-	}
-	
-	$this->load->view('sidebar',$user_bar);
-	$sql5= "SELECT * FROM webboard	 WHERE Group_ID =  '$id' ";
-	$query2 = $this->db->query($sql5)->result();
 	
 	$sql3= "SELECT * FROM reply WHERE QuestionID ";
 	$query5 = $this->db->query($sql3)->result();
 	
 	$data["q5"] = $query5;
 	
-	$data["q2"] =$query2 ;
-	$data["q3"] = $id;
+	$data["q2"] =$query3 ;
 
-	$this->load->view('group_content',$data);
-	
+	$this->load->view('group_content_t',$data);
 	}
 		$this->load->view('footer');
 }

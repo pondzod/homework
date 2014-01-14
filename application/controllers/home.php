@@ -44,7 +44,32 @@ class home extends CI_Controller {
   {
   	$this->load->view('header');
   
-  	$this->load->view('test');
+  
+	$user = $this->session->userdata('user');
+	
+	$sql= "SELECT * FROM student ";
+	$query = $this->db->query($sql)->result();
+	
+	$data["q"] = $query;
+	$data["q2"] = $user;
+	
+	
+	$sql2= "SELECT GroupID FROM group_user WHERE Username=  '$user' ";
+	$query2 = mysql_query($sql2);
+	$num_rows = mysql_num_rows($query2);
+	
+	$group[] = array();
+	$i=0;
+	while ($id = mysql_fetch_array($query2))
+	{
+	
+		$sql3= "SELECT * FROM group_detail WHERE Group_ID =  '$id[GroupID]' ";
+		$group[$i] = $this->db->query($sql3)->result();
+		
+		$i+=1;
+		
+	}
+	print_r ($group);
   	$this->load->view('footer');
   }
   
@@ -98,7 +123,7 @@ class home extends CI_Controller {
   			
   				
   		
-  	if(copy($_FILES["Pic"]["tmp_name"],"./User_data/$name/pic/".$_FILES["Pic"]["name"]))
+  	if(move_uploaded_file($_FILES["Pic"]["tmp_name"],"./User_data/$name/pic/".$_FILES["Pic"]["name"]))
   	{
   	
   		$fileUpload=$_FILES["Pic"]["name"];
@@ -139,21 +164,7 @@ class home extends CI_Controller {
 			}else {
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		
 			
   				
   				?>
@@ -292,6 +303,20 @@ function stu_index()
 	$data["q"] = $query;
 	$data["q2"] = $user;
 	
+	
+	$sql2= "SELECT GroupID FROM group_user WHERE Username=  '$user' ";
+	$query2 = mysql_query($sql2);
+	
+	while ($id = mysql_fetch_array($query2))
+	{
+	
+		$sql3= "SELECT * FROM group_detail WHERE Group_ID =  '$id[GroupID]' ";
+		$query3 = $this->db->query($sql3)->result();
+		$data["q4"]= $query3;
+		
+	}
+	
+	
 	if ($user!='')
 	{
 		$this->load->view('header');
@@ -349,7 +374,7 @@ function teacher_regis()
 	  					
 	  		
 	  		
-	  			if(copy($_FILES["Pic"]["tmp_name"],"./User_data/$name/pic/".$_FILES["Pic"]["name"]))
+	  			if(move_uploaded_file($_FILES["Pic"]["tmp_name"],"./User_data/$name/pic/".$_FILES["Pic"]["name"]))
   	{
   	
   		$fileUpload=$_FILES["Pic"]["name"];
@@ -468,40 +493,6 @@ function do_upload()
 	
 	}
 
-function cre_ass1(){
-
-
-if(copy($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name"]))
-{
-
-	$fileUpload=$_FILES["file_cre"]["name"];
-}
-$file = $_FILES["file_cre"]["name"];
-$Question = $this->input->post('txtQuestion');
-$Details = $this->input->post('txtDetails');
-$Name = $this->input->post('txtName');
-
-$data = array(
-		'CreateDate' => date("Y-m-d H:i:s"),
-		'Question' => $Question,
-		'Details' => $Details,
-		'Name' => $Name,
-		'file' => $file );
-
-if (empty($Question) || empty($Details) ||empty($Name) ) { 
-print ('กรอกให้ครบ');}
-else {
-	
-$sql = $this->db->insert('webboard',$data);
-$q = mysql_query($sql);
-
-
-
-?>
-<h1 align="center">	ตั้งหัวข้อเรียบร้อย!</h1>
-<p align="center"><a href="<?echo site_url();?>home/stu_index">Back</a></p>
-<?php }
- }
 
 function cre_ass()
 
@@ -618,7 +609,7 @@ function change_pass()
 	{
 
 
-		if(copy($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name"]))
+		if(move_uploaded_file($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name"]))
 		{
 		
 			$fileUpload=$_FILES["file_cre"]["name"];

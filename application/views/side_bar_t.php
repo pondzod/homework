@@ -20,15 +20,14 @@
               Group: <a href="#create" data-toggle="modal">Create</a>  or         
  				   <a href="#myModal" data-toggle="modal">Join</a>
              
-              <ul class="nav nav-pills nav-stacked">
-  <li class="active">
+         <div class="list-group">
     <? foreach ($q2 as $row){?>
-  <a href ="<?echo site_url();?>group/index/<?php echo $row->Group_ID;?>">
-     <?php echo $row->Group_Name; ?><span class="badge pull-right">42</span>
-    </a>
-  </li> <?php }?> </ul>
+  <a href ="<?echo site_url();?>group_t/index/<?php echo $row->Group_ID;?> "class="list-group-item">
+     <?php echo $row->Group_Name; ?>
+    </a><?php }?>
+  </div>
   
-
+ 
 
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">

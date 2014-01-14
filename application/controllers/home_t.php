@@ -454,6 +454,49 @@ mkdir($directory,0777,true);
 <p align="center"><a href="<?echo site_url();?>home_t/teacher_index">Back</a></p>
 <?php }
  }
+function cre_ass2($id){
+if(move_uploaded_file($_FILES["file_cre"]["tmp_name"],"./file_temp/".$_FILES["file_cre"]["name"]))
+{
+
+	$fileUpload=$_FILES["file_cre"]["name"];
+}
+$file = $_FILES["file_cre"]["name"];
+$Question = $this->input->post('txtQuestion');
+$Details = $this->input->post('txtDetails');
+
+$user 	= $this->session->userdata('user');
+$date = date('Y-m-d',strtotime($_POST['date']));
+$data = array(
+		'CreateDate' => date("Y-m-d H:i:s"),
+		'Question' => $Question,
+		'Details' => $Details,
+		'Name' => $user,
+		'file' => $file,
+		'Group_ID' => $id,
+		'Date_end' => $date);
+
+if (empty($Question) || empty($Details)) { 
+print ('กรอกให้ครบ');}
+else {
+	
+
+
+
+$sql2 = "SELECT MAX(QuestionID)FROM webboard";
+$q2 = mysql_query($sql2);
+$res2 = mysql_fetch_array($q2);
+$res2=$res2[0] +1;
+$directory = "./file_assignment/$res2";
+
+@mkdir($directory,0777,true);
+$sql = $this->db->insert('webboard',$data);
+mysql_query($sql);
+?>
+
+<h1 align="center">	ตั้งหัวข้อเรียบร้อย!</h1>
+<p align="center"><a href="<?echo site_url();?>home_t/teacher_index">Back</a></p>
+<?php }
+}
 
 function cre_ass()
 

@@ -4,7 +4,7 @@ class assign extends CI_Controller {
 
 	function view($a)
 	{
-	
+		
 	$this->load->view('header');
 	$this->load->view('menu');
  
@@ -18,7 +18,7 @@ $sql2= "SELECT * FROM reply WHERE QuestionID =  '$a' ";
 $query2 = $this->db->query($sql2)->result();
 
 $data["q2"] = $query2;
-
+$data["q3"] = $a;
 
 $this->load->view('ViewWebboard',$data);
 
@@ -82,14 +82,36 @@ $q = mysql_query($sql);
 	
 	
 	}
-	function send()
+	function send($id)
 	{
+		$user 	= $this->session->userdata('user');
+		
 		$this->load->view('header');
 		$this->load->view('menu');
-		$this->load->view('send');
+		if(move_uploaded_file($_FILES["file"]["tmp_name"],"./file_assignment/'$id'".$_FILES["file"]["name"]))
+		{
+		
+			$fileUpload=$_FILES["file"]["name"];
+		}
+		$file = $_FILES["file"]["name"];
+		
+		$Details = $this->input->post('datail');
+		$data = array(
+				'CreateDate' => date("Y-m-d H:i:s"),
+				'QuestionID' => $id,
+				'Detail' => $Details,
+				'Name' => $user,
+				'file' => $file);
 		
 		
+		$sql = $this->db->insert('assignment',$data);
+		$q = mysql_query($sql);
+		?>
+		<h1 align="center">	ส่งงานเรียบร้อย!</h1>
+		<p align="center"><a href="<?echo site_url();?>home/stu_index">Back</a></p>
+	<?php $this->load->view('footer');
 	}
+
 	
 	
 }

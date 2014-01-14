@@ -16,63 +16,44 @@
               </table>
         
              
-              Group: <a href="#myModal" data-toggle="modal">Create</a>  or         
- 				   <a href="#myModal" data-toggle="modal">Join</a>
+              Group:         
+ 				   <a href="#join" data-toggle="modal">Join</a>
               <ul class="nav nav-pills nav-stacked">
   <li class="active">
-    <a href="#">
-      <span class="badge pull-right">42</span>
-      Home
+    <? foreach ($q4 as $row){?>
+  <a href ="<?echo site_url();?>group/index/<?php echo $row->Group_ID;?>">
+     <?php echo $row->Group_Name; ?><span class="badge pull-right">42</span>
     </a>
-  </li>  </ul>
+    
+  </li>  <?php } ?></ul>
  
+</div>
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+<div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Create Group</h4>
+        <h4 class="modal-title" id="myModalLabel">Join Group</h4>
       </div>
       <div class="modal-body">
        
-       <form id="f1" action="<?echo site_url();?>home_t/cre_group" class="form-horizontal" method="post"   onsubmit="return  randomStringp();"  >
+       <form id="f1" name ="join"action="<?echo site_url();?>group/join" class="form-horizontal" method="post"   onsubmit="return  checkkey();"  >
 
  <div class="form-group">
-   <label for="inputuser" class="col-lg-3 control-label">ชื่อกลุ่ม</label>
+   <label for="inputuser" class="col-lg-3 control-label">รหัสกลุ่ม</label>
  <div class="col-lg-5">
-<input type="text" class="form-control"  id="name" name="name" >
+<input type="text" class="form-control"  id="keygroup" name="keygroup">
 </div>
 </div>
-<div class="form-group">
-	<label for="inputuser" class="col-lg-3 control-label">ชื่อวิชา</label>
-<div class="col-lg-5">
-<input type="text" class="form-control" id="name_sub" name="name_sub" >
-</div></div>
-<div class="form-group">
-<label for="inputuser" class="col-lg-3 control-label">สาขา</label>
-<div class="col-lg-5">
-<input type="text" class="form-control"  id="major" name="major" >
-</div></div>
 
-<div class="form-group">
-<label for="inputuser" class="col-lg-3 control-label">หมู่เรียน</label>
-<div class="col-lg-5">
-<input type="text" class="form-control"  id="group" name="group" >
-</div></div>
-   <div class="form-group">
-    <label for="inputuser" class="col-lg-3 control-label">  
-   
-   
-       <input type="hidden" id="gen" name="gen" type="text"  value=""/>
-       </div></div>
        
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button  type="submit" class="btn btn-primary">Create</button>
+        <button  type="submit" class="btn btn-primary">Join</button>
         </form>
       </div>
     </div><!-- /.modal-content -->
@@ -98,4 +79,18 @@ function randomStringp() {
     return true;
 }
 
-</script>
+
+          function checkkey(){
+        	  if(document.join.keygroup.value == "" ) 
+        	  {
+        		 
+        		  document.join.keygroup.focus();
+              return false;
+        	  }
+              else
+                  return true;
+
+          
+
+          }
+       </script>

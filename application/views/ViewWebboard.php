@@ -62,7 +62,7 @@ foreach ($q2 as $row){
    		<?php $userm = $this->session->userdata('user');?>
    	
  	
-		<img src="<?echo site_url();?>/User_data/<?php echo $userm?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img>  <?php echo $userm?><br>
+		<img src="<?echo site_url();?>User_data/<?php echo $userm?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img>  <?php echo $userm?><br>
   	</tr><tr><td>
     Attach file:<input type="file"  id="InputFile" name="Pic">
   	 <button class="btn btn-default " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-book"> Library</span></button>
@@ -78,22 +78,39 @@ foreach ($q2 as $row){
 		</form>
 		
 		<a href = "<?echo site_url();?>home/stu_index"  button type="button" class="btn btn-default">Back to Webboard</button></a>
-		<a href = "<?echo site_url();?>assign/send"  button type="button" class="btn btn-info btn-md">ส่งงาน</button></a>
+		<a href="#assignment" data-toggle="modal"button type="button" class="btn btn-info btn-md">ส่งงาน</button></a>
 		
 		
-		<div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Upload Files</h4>
-      </div>
-      <div class="modal-body">
-        <p>กำลังทำ:: สำหรับอัปโหลดไฟล์จาก server&hellip;</p>
-      </div>
+<div class="modal fade" id="assignment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">ส่งงาน</h4>
+</div>
+
+<div class="modal-body">
+
+ <table class="table table-bordered table-striped responsive-utilities"><?php 
+ 
+ foreach ($q as $row){
+	?><tr><td><?php 
+ 	echo $row->Question;?>
+ 	<tr><td><?php 
+ 	echo $row->Details;
+	
+	}?> </td></tr>
+	</table><form id="f1" action="<?echo site_url();?>assign/send/<?php echo $q3; ?>" class="form-horizontal" method="post" id="frmSend" onsubmit="return senddata();" enctype="multipart/form-data" target="uploadtarget">
+<textarea id="about" name="detail" class= "form-control" rows="4" cols="5"></textarea>
+
+ Attach file:<input type="file"  id="InputFile" name="file">
+</div>
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button  type="submit" class="btn btn-primary">ส่งงาน</button>
+        </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
