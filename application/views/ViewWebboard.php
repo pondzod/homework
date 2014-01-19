@@ -1,5 +1,5 @@
- <div class="col-md-2"></div><div class="col-md-7"><?
-foreach ($q as $row){
+ <div class="col-md-7"><?
+foreach ($ass_detail as $row){
 ?><?php $name = $row->Name;?>
 		<table class="table table-striped" width="738"  cellpadding="1" cellspacing="1">
 		<tr>
@@ -28,7 +28,7 @@ foreach ($q as $row){
 		<br>
 		<?}
 		
-foreach ($q2 as $row){
+foreach ($reply as $row){
 ?>
 		<table class="table table-striped" width="738"  cellpadding="1" cellspacing="1">
 		
@@ -91,7 +91,7 @@ foreach ($q2 as $row){
 
  <table class="table table-bordered table-striped responsive-utilities"><?php 
  
- foreach ($q as $row){
+ foreach ($ass_detail as $row){
 	?><tr><td><?php 
  	echo $row->Question;?>
  	<tr><td><?php 

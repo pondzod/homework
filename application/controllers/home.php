@@ -296,37 +296,32 @@ function stu_index()
 {
 
 	$user = $this->session->userdata('user');
-	
+	if ($user!='')
+	{
 	$sql= "SELECT * FROM student WHERE Username =  '$user' ";
 	$query = $this->db->query($sql)->result();
 	
 	$data["q"] = $query;
 	$data["q2"] = $user;
+	$query33 =
+	$this->db
+	->select('*')
+	->from('group_user')
+	->join('group_detail', 'group_user.GroupID = group_detail.Group_ID')
+	->where('Username',$user)
+	->get()
+	->result();
+	
+	$this->load->view('header');
+	$this->load->view('menu');
 	
 	
-	$sql2= "SELECT GroupID FROM group_user WHERE Username=  '$user' ";
-	$query2 = mysql_query($sql2);
-	
-	while ($id = mysql_fetch_array($query2))
-	{
-	
-		$sql3= "SELECT * FROM group_detail WHERE Group_ID =  '$id[GroupID]' ";
-		$query3 = $this->db->query($sql3)->result();
-		$data["q4"]= $query3;
-		
-	}
+	$data["q_bar"] = $query33;
+	$this->load->view('sidebar',$data);
 	
 	
-	if ($user!='')
-	{
-		$this->load->view('header');
-		$this->load->view('menu');
-		$this->load->view('sidebar',$data);
 
-		$sql= "SELECT * FROM webboard WHERE QuestionID =  '20' ";
-		$query = $this->db->query($sql)->result();
-		
-		$data["q3"] = $query;
+
 		
 		$sql2= "SELECT * FROM reply WHERE QuestionID =  '20' ";
 		$query2 = $this->db->query($sql2)->result();

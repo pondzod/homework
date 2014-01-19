@@ -91,31 +91,68 @@ $q = mysql_query($sql);
 		
 		
 	}
+	function score($id)
+	{
+		$this->load->view('header');
+		$this->load->view('menu_teach');
+		$data = array(
+				
+				'Score' => $_POST["score"]);
+				
+				
+		
+		$sql =$this->db->where('AssignmentID', $id);
+	
+		$this->db->update('assignment',$data);
+	print $id;
+		
+
+	}
 	function check($id_ass)
 	{
-		$sql= "SELECT * FROM webboard WHERE QuestionID =  '$a' ";
+
+		$this->load->view('header');
+		$this->load->view('menu_teach');
+		$user = $this->session->userdata('user');
+		$sql= "SELECT * FROM webboard WHERE Name =  '$user' ";
 		$query = $this->db->query($sql)->result();
+		
 		if (empty($query))
 		{
 
-			$this->load->view('check_ass');
+			print('คุณไม่มีสิทธิ์ตรวจ');
 		
 		}
 		else 
 		{
-			$this->load->helper('file');
+		
+			
+				$sql2= "SELECT * FROM  `assignment` WHERE  `QuestionID` = '$id_ass' ";
+			$query2 = $this->db->query($sql2)->result();
+			
+			$sql3= "SELECT * FROM  `webboard`
+			WHERE  `QuestionID` = '$id_ass' ";
+			$query3 = $this->db->query($sql3)->result();
+			
+			
+			$query33 =
+			$this->db
+			->select('*')
+			->from('assignment')
+			->join('student', 'student.Username = assignment.Name')
+			->get()
+			->result();
+			
+			$data["question"] = $query3;
+		/*	
 			$path  = "./file_assignment/$id_ass";
 			$files = get_dir_file_info ($path,$top_level_only = TRUE);
 			
-			$data= array('error' => ' ')  ;
 			
-			
-			
-			
-			$data["q2"] = $files;
-			
-			$this->load->view('my_file',$data );
-			
+			$data["q2"] = $files;*/
+			$data["details"] = $query2;
+			$this->load->view('check_ass',$data);
+			$this->load->view('footer');
 			
 			
 		}

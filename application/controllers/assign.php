@@ -4,7 +4,7 @@ class assign extends CI_Controller {
 
 	function view($a)
 	{
-		
+		$user 	= $this->session->userdata('user');
 	$this->load->view('header');
 	$this->load->view('menu');
  
@@ -12,13 +12,27 @@ class assign extends CI_Controller {
 		$sql= "SELECT * FROM webboard WHERE QuestionID =  '$a' ";
 $query = $this->db->query($sql)->result();
 
-$data["q"] = $query;
+$data["ass_detail"] = $query;
 
 $sql2= "SELECT * FROM reply WHERE QuestionID =  '$a' ";
 $query2 = $this->db->query($sql2)->result();
 
-$data["q2"] = $query2;
+$data["reply"] = $query2;
 $data["q3"] = $a;
+$sql= "SELECT * FROM student WHERE Username =  '$user' ";
+$query = $this->db->query($sql)->result();
+$data["q2"] = $user;
+$query33 =
+$this->db
+->select('*')
+->from('group_user')
+->join('group_detail', 'group_user.GroupID = group_detail.Group_ID')
+->where('Username',$user)
+->get()
+->result();
+$user_bar["q_bar"] = $query33;
+$user_bar["q"]= $query;
+$this->load->view('sidebar',$user_bar);
 
 $this->load->view('ViewWebboard',$data);
 
@@ -33,6 +47,8 @@ $this->load->view('ViewWebboard',$data);
 
 function reply($a)
 	{
+		
+		
 		$data = array(
 				'QuestionID' => $a,
 				'CreateDate' => date("Y-m-d H:i:s"),
@@ -85,10 +101,14 @@ $q = mysql_query($sql);
 	function send($id)
 	{
 		$user 	= $this->session->userdata('user');
-		
+		$sql= "SELECT * FROM student WHERE Username =  '$user' ";
+		$query = $this->db->query($sql)->result();
+		$q2 = mysql_query($sql);
+  	$res2 = mysql_fetch_array($q2);
+  	$user  = $res2["id"].$res2["name"];
 		$this->load->view('header');
 		$this->load->view('menu');
-		if(move_uploaded_file($_FILES["file"]["tmp_name"],"./file_assignment/'$id'".$_FILES["file"]["name"]))
+		if(move_uploaded_file($_FILES["file"]["tmp_name"],"./file_assignment/$id/".$_FILES["file"]["name"]))
 		{
 		
 			$fileUpload=$_FILES["file"]["name"];
@@ -112,7 +132,16 @@ $q = mysql_query($sql);
 	<?php $this->load->view('footer');
 	}
 
-	
+	function search_ass(){
+$this->load->view('header');
+$this->load->view('menu');
+
+$strSQL = "SELECT * FROM assignment WHERE (Name LIKE '%".$_GET["txtKeyword"]."%' or Email LIKE '%".$_GET["txtKeyword"]."%' )";
+$objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
+$this->load->view('search',$data);
+}
+
+
 	
 }
 	

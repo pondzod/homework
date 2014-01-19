@@ -18,7 +18,7 @@
     <script src="<?echo base_url();?>asset/js/jquery-1.8.3.js"></script>
 
     <script src="<?echo base_url();?>asset/js/jquery-ui.js"></script>
- 
+
   </head>
 
-  
+ 

@@ -18,14 +18,13 @@
              
               Group:         
  				   <a href="#join" data-toggle="modal">Join</a>
-              <ul class="nav nav-pills nav-stacked">
-  <li class="active">
-    <? foreach ($q4 as $row){?>
-  <a href ="<?echo site_url();?>group/index/<?php echo $row->Group_ID;?>">
-     <?php echo $row->Group_Name; ?><span class="badge pull-right">42</span>
-    </a>
+                <div class="list-group">
+    <? foreach ($q_bar as $row){?>
+  <a href ="<?echo site_url();?>group/index/<?php echo $row->Group_ID;?>"class="list-group-item">
+     <?php echo $row->Group_Name; ?></a>  <!-- <span class="badge pull-right">42</span> -->
     
-  </li>  <?php } ?></ul>
+  <?php } ?>
+  </div>
  
 </div>
 

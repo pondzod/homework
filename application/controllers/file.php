@@ -35,6 +35,20 @@ class file extends CI_Controller {
 		
 	}
 
+	function download_filestu($a)
+	{
+	
+		$sql= "SELECT * FROM webboard WHERE QuestionID =  '$a' ";
+		$query = $this->db->query($sql)->result();
+		$this->load->helper('download');
+	
+		$data = file_get_contents("./file_assignment/$a");
+		$name = $a;
+	
+		force_download($name,$data);
+	
+	
+	}
 	
 	function pic_resize(){
 		$user 	= $this->session->userdata('user');
@@ -72,11 +86,14 @@ class file extends CI_Controller {
 			$user 	= $this->session->userdata('user');
 			$this->load->helper('file');
 			$this->load->helper('directory');
-			$map = directory_map("./User_data/$user/");
+			$map = directory_map("./file_assignment/$a");
 			unlink("./User_data/$user/$a");
-			redirect('home/my_file');
+			redirect('/homework/assign_t/check/18');
+			
+			$this->db->delete('mytable', array('id' => $id));
 			
 			
+				
 		
 		
 		
