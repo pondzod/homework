@@ -95,6 +95,7 @@ $q = mysql_query($sql);
 	{
 		$this->load->view('header');
 		$this->load->view('menu_teach');
+		$id_ass =$this->session->userdata('id_ass');
 		$data = array(
 				
 				'Score' => $_POST["score"]);
@@ -104,7 +105,7 @@ $q = mysql_query($sql);
 		$sql =$this->db->where('AssignmentID', $id);
 	
 		$this->db->update('assignment',$data);
-	print $id;
+		redirect('assig_t/check/$id_ass');
 		
 
 	}
@@ -140,6 +141,7 @@ $q = mysql_query($sql);
 			->select('*')
 			->from('assignment')
 			->join('student', 'student.Username = assignment.Name')
+			->where('assignment.QuestionID',$id_ass)
 			->get()
 			->result();
 			
@@ -150,13 +152,89 @@ $q = mysql_query($sql);
 			
 			
 			$data["q2"] = $files;*/
-			$data["details"] = $query2;
+			$data["details"] = $query33;
 			$this->load->view('check_ass',$data);
 			$this->load->view('footer');
 			
 			
 		}
+		
+
 	}
+	function send_email($id_q)
+	{
+		session_start(); 
+	$name = $this->session->userdata('name');
+	
+		$query33 =
+	$this->db
+	->select('*')
+	->from('assignment')
+	->join('student','assignment.Name = student.Username')
+	->where('assignment.QuestionID',$id_q)
+	->get()
+	->result();
+		
+		$config = array(
+			
+				'mailtype' => 'html',
+				'charset' => 'utf-8'
+		);
+		foreach ($query33 as $res)
+		{
+			$nameu=$res->name;
+			$id  = $res->id;
+			$Score =$res->Score;
+			$Crete = $res->CreateDate;
+			
+			$m = '';
+		  	$m .= '<table border="1" cellpadding="10" cellspacing="0">';
+			$m .= '<thead  bgcolor="#cccccc">';
+		
+			$m .='</tr>';
+			$m .='</thead>';
+			$m .='<tbody>';
+			$m .='<b>ชืองาน :</b><i>'.$name.'</i>';
+			$m .='<b>ชื่อผู้ใช้ : </b><i>'.$nameu.' รหัส :'.$id.'</i>';
+			$m .='<br><br>';
+			$m .='<b>คะแนนงาน: </b><i>'.$Score .'</i>';
+			$m .='<br><br>';
+			$m .='<b>วันที่ส่งงาน: </b><i>'.$Crete.'</i>';
+			
+			$m .= '</tbody>';
+			$m .= '</table>';
+			$this->load->library('email', $config);
+			
+			$this->email->from('pondnaja@pondnajadd.com', 'ชื่อผู้ส่ง');
+			$this->email->to($res->E_mail); //ส่งถึงใคร
+			$this->email->subject('คะแนนงาน'.$nameu);
+					   $this->email->set_newline("\r\n");
+			 //หัวข้อของอีเมล
+			$this->email->message($m);
+			$this->email->send();
+			$result = $this->email->send();
+		
+			
+		}
+		if ($result) {
+			header("Content-type: text/html; charset=utf-8");
+			echo "<script>alert('บันทึกการเปลี่ยนแปลงเสร็จสมบูรณ์')</script>";
+			?>
+										<meta http-equiv="refresh" content="0;URL=<?php echo site_url('main/close');?>">
+									<?php
+					            }else{
+					                header("Content-type: text/html; charset=utf-8");
+					                echo "<script>alert('เกิดข้อผิดพลาด กรุณาลองใหม่')</script>";
+					
+					                ?>
+					                    <meta http-equiv="refresh" content="0;URL=<?php echo site_url('main/close');?>">
+					                <?php
+					            }
+		
+		
+	
+	}
+	
 	
 }
 	

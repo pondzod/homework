@@ -125,8 +125,7 @@ class home extends CI_Controller {
   		
   	if(move_uploaded_file($_FILES["Pic"]["tmp_name"],"./User_data/$name/pic/".$_FILES["Pic"]["name"]))
   	{
-  	
-  		$fileUpload=$_FILES["Pic"]["name"];
+		$fileUpload=$_FILES["Pic"]["name"];
   	}
   	$Pic = $_FILES["Pic"]["name"];
   	
@@ -289,9 +288,6 @@ if (empty($n) || empty($s)) { ?>
   		
   	}
   	
-  	
-
-
 function stu_index()
 {
 
@@ -311,23 +307,18 @@ function stu_index()
 	->where('Username',$user)
 	->get()
 	->result();
-	
 	$this->load->view('header');
 	$this->load->view('menu');
-	
-	
 	$data["q_bar"] = $query33;
 	$this->load->view('sidebar',$data);
-	
-	
-
-
+		$notes= $this->db
+	->select('*')
+	->from('note')
+	->join('comment', 'comment.noteID = note.NoteID','left outer')
+	->get()
+	->result();
 		
-		$sql2= "SELECT * FROM reply WHERE QuestionID =  '20' ";
-		$query2 = $this->db->query($sql2)->result();
-		
-		$data["q4"] = $query2;
-		
+		$data["note"] = $notes;
 		$this->load->view('content',$data);
 		$this->load->view('footer');
 		
@@ -638,7 +629,88 @@ function change_pass()
 	}
 	
 	
+	function search_ass(){
+$user 	= $this->session->userdata('user');
+$groupid= $this->input->get('grouplist');
+
+if (empty($groupid))
 	
+{
+	$query33 =
+	$this->db
+	->select('*')
+	->from('group_user')
+	->join('group_detail', 'group_user.GroupID = group_detail.Group_ID')
+	->where('Username',$user)
+	->get()
+	->result();
+	
+	$data["group"]=$query33;
+		$this->load->view('header');
+		$this->load->view('menu');
+		$this->load->view('search',$data);
+		
+		
+		
+		
+		
+		
+}
+else{
+		
+		$this->load->view('header');
+$this->load->view('menu');
+	
+		$query33 =
+$this->db
+->select('*')
+->from('group_user')
+->join('group_detail', 'group_user.GroupID = group_detail.Group_ID')
+->where('Username',$user)
+->get()
+->result();
+		$data["group"]=$query33;
+		$query2 =
+		$this->db
+		->select('*')
+		->from('webboard')->where('webboard.Group_ID',$groupid)
+		->join('assignment', 'webboard.QuestionID = assignment.QuestionID')
+		
+		->where('assignment.name',$user)
+		->get()
+		->result();
+		$data["res"] = $query2;
+	/*
+		$strSQL = "SELECT * FROM assignment WHERE (Name LIKE '%".$_GET["txtKeyword"]."%' or Email LIKE '%".$_GET["txtKeyword"]."%' )";
+		$objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]"); */
+		$this->load->view('search',$data);
+	}
+}
+
+
+function comment($id){
+
+		$ment = $this->input->post('comment');
+		
+		
+		$data = array(
+				'CreateDate' => date("Y-m-d H:i:s"),
+				'Detail' => $ment,
+				'noteID'=>$id
+				 );
+		
+		
+				$sql = $this->db->insert('comment',$data);
+				$q = mysql_query($sql);
+		
+		
+		
+				?>
+		<h1 align="center">	ตั้งหัวข้อเรียบร้อย!</h1>
+		<p align="center"><a href="<?echo site_url();?>home/stu_index">Back</a></p>
+		<?php 
+		
+	}
 
 
 

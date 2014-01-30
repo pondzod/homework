@@ -101,11 +101,7 @@ $q = mysql_query($sql);
 	function send($id)
 	{
 		$user 	= $this->session->userdata('user');
-		$sql= "SELECT * FROM student WHERE Username =  '$user' ";
-		$query = $this->db->query($sql)->result();
-		$q2 = mysql_query($sql);
-  	$res2 = mysql_fetch_array($q2);
-  	$user  = $res2["id"].$res2["name"];
+	
 		$this->load->view('header');
 		$this->load->view('menu');
 		if(move_uploaded_file($_FILES["file"]["tmp_name"],"./file_assignment/$id/".$_FILES["file"]["name"]))
@@ -132,14 +128,6 @@ $q = mysql_query($sql);
 	<?php $this->load->view('footer');
 	}
 
-	function search_ass(){
-$this->load->view('header');
-$this->load->view('menu');
-
-$strSQL = "SELECT * FROM assignment WHERE (Name LIKE '%".$_GET["txtKeyword"]."%' or Email LIKE '%".$_GET["txtKeyword"]."%' )";
-$objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
-$this->load->view('search',$data);
-}
 
 
 	

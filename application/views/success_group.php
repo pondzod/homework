@@ -7,10 +7,10 @@
        foreach ($q as $row){
 echo'กลุ่มของคุณชื่อ:'.$row->Group_Name; 
 
-echo',<br>คีย์ในการเข้ากลุ่ม'.$row->Key; 
+echo',<br>คีย์ในการเข้ากลุ่ม:'.$row->Key; 
 
 }
-?>
+?><button type="button" class="btn btn-default">OK</button>
        </td>
        </tr></table>      </center>
              

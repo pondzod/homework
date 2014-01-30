@@ -299,7 +299,7 @@ $query2 = $this->db->query($sql2)->result();
 $data2["q"] = $query2;
 $this->load->view('success_group',$data2);
 			
-	
+$this->load->view('footer');
 	
 	
 }
@@ -526,6 +526,10 @@ function teacher_index()
 	$data["q2"] = $query2;
 	$this->load->view('header');
 	$this->load->view('menu_teach');
+	$sql2= "SELECT * FROM note  ";
+	$query2 = $this->db->query($sql2)->result();
+	
+	$data["note"] = $query2;
 	$this->load->view('side_bar_t',$data);
 	$this->load->view('content');
 	$this->load->view('footer');

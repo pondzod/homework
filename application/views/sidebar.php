@@ -4,10 +4,10 @@
  <?php $user 	= $this->session->userdata('user');?>
              <table class="table table-bordered table-striped responsive-utilities">
  <tr>
- <td>  Profile</td></tr>
+ <td><center> <h4>Profile</h4></center> </td></tr>
  				<tr><td>
               <? foreach ($q as $row){
-              	?><img src="<?echo site_url();?>/User_data/<?php echo $user?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="100" width="100"><br><br>
+              	?><center><img src="<?echo site_url();?>/User_data/<?php echo $user?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="100" width="100"></center><br>
               	<?php echo 'คุณ:' .$row->name; echo'<br>';
               	
               	echo 'Email:'.$row->E_mail;

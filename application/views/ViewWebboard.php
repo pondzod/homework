@@ -9,8 +9,8 @@ foreach ($ass_detail as $row){
 		    <td height="53" colspan="2"><?=$row->Details;?></td>
 		  </tr>
 		  <tr>
-		    <td width="397"><img src="<?echo site_url();?>User_data/<?=$row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"></img>   Create Date : <?=$row->CreateDate;?></td>
-		    <td width="253">View : <?=$row->View;?> Reply : <?=$row->Reply;?></td>
+		    <td width="397"><img src="<?echo site_url();?>User_data/<?=$row->Name;?>/pic/profile_pic.jpg" alt="profile" class="img-rounded" height="50" width="50"><?=$row->Name;?></img>   Create Date : <?=$row->CreateDate;?></td>
+		    <td width="253">Reply : <?=$row->Reply;?></td>
 		<?php  
 		$file =  $row->file;
 		 ?>

@@ -5,7 +5,7 @@
         <h2 class="form-signin-heading">Sign in</h2>
         <input type="text" name ="user" class="form-control" placeholder="Username">
         <input type="password" name ="pass" class="form-control" placeholder="Password">
-        
+     <!--  
 <div class="radio">
 <label>
  <input type="radio" name="type" id="optionsRadios1" value="student"  checked>
@@ -16,7 +16,7 @@ I'm student
     <input type="radio" name="type" id="optionsRadios2" value="teacher" >
 I'm teacher
   </label>
-</div>
+</div> -->
          
         <div class="checkbox">
         <label>

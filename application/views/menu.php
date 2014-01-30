@@ -1,5 +1,5 @@
   <div class="container">
-      <h2>ระบบการจัดการการส่งการบ้าน</h2>
+      <h3>ระบบส่งงานออนไลน์ </h3>
       <div class="container">
         <div class="navbar">
           <div class="navbar-inner">
@@ -17,7 +17,9 @@
                       <li>
                         <a href="<?php echo base_url();?>home/assign">Assignment</a>
                       </li>
-                  
+                   <li>
+                        <a href="<?php echo base_url();?>home/search_ass">Search</a>
+                      </li>
                      
                       <li>
                         <a href="<?php echo base_url();?>home/my_file">My file</a>

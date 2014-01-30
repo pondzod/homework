@@ -1,4 +1,6 @@
- <div class="col-md-2"></div>
+ <div class="col-md-2">
+
+ </div>
  <div class="col-md-5">
  Post:
  <ul class="nav nav-tabs">
@@ -75,9 +77,9 @@ File size <= 5Mb
    </tr></td>
   
   
-  </form></div>
+  </form>
  </table>
- 
+
  
  	<?php $userm = $this->session->userdata('user');
    		
@@ -105,9 +107,12 @@ File size <= 5Mb
    			
    			<?php }?>
 </div></table>
-<?php }?>
-	
+<?php }?></div></div>
+
+
   
+
+	
    			
    			
    			
